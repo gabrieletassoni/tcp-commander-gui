@@ -1,0 +1,45 @@
+[{
+    "desc": "Nec NP-PX1005QL-B",
+    "ip": "192.168.80.100",
+    "port": 7142,
+    "commands": {
+        "on": "%1POWR 1\r",
+        "off": "%1POWR 1\r"
+    }
+},
+{
+    "desc": "Sanyo PLC-HF10000L",
+    "ip": "192.168.80.101",
+    "port": 4352,
+    "commands": {
+        "on": "%1POWR 1\r",
+        "off": "%1POWR 0\r"
+    }
+},
+{
+    "desc": "Sanyo PLC-HF10000L",
+    "ip": "192.168.80.102",
+    "port": 4352,
+    "commands": {
+        "on": "%1POWR 1\r",
+        "off": "%1POWR 0\r"
+    }
+},
+{
+    "desc": "Sanyo PLC-HF10000L",
+    "ip": "192.168.80.103",
+    "port": 4352,
+    "commands": {
+        "on": "%1POWR 1\r",
+        "off": "%1POWR 0\r"
+    }
+},
+{
+    "desc": "Sanyo PLC-HF10000L",
+    "ip": "192.168.80.104",
+    "port": 4352,
+    "commands": {
+        "on": "%1POWR 1\r",
+        "off": "%1POWR 0\r"
+    }
+}]

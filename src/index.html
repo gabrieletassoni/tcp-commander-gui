@@ -74,7 +74,6 @@
         if (file.name == "config.json" && file.type == "application/json") {
           // config.json will be created or overwritten by default.
           fs.copyFile(file.path, path.join(".", 'config.json'), (err) => {
-            console.log("Sono dentro")
             if (err)
               document.getElementById("log").innerHTML +=
               `<div>${(new Date()).toLocaleString()} - config.json non salvato.</div>`;
@@ -82,8 +81,8 @@
               config = JSON.parse(fs.readFileSync(path.join(".", 'config.json')));
               document.getElementById("log").innerHTML +=
                 `<div>${(new Date()).toLocaleString()} - config.json salvato correttamente.</div>`;
-              document.getElementById("on").style.display = "block";
-              document.getElementById("off").style.display = "block";
+              document.getElementById("on").style.display = "inline";
+              document.getElementById("off").style.display = "inline";
               document.getElementById("droparea").style.display = "none";
             }
           });
