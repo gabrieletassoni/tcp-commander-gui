@@ -397,6 +397,11 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+blob-to-buffer@^1.0.2:
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/blob-to-buffer/-/blob-to-buffer-1.2.8.tgz#78eeeb332f1280ed0ca6fb2b60693a8c6d36903a"
+  integrity sha512-re0AIxakF504MgeMtIyJkVcZ8T5aUxtp/QmTMlmjyb3P44E1BEv5x3LATBGApWAJATyXHtkXRD+gWTmeyYLiQA==
+
 bluebird@^3.1.1, bluebird@^3.5.0:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.2.tgz#9f229c15be272454ffa973ace0dbee79a1b0c36f"
@@ -769,6 +774,14 @@ detect-node@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.0.4.tgz#014ee8f8f669c5c58023da64b8179c083a28c46c"
   integrity sha512-ZIzRpLJrOj7jjP2miAtgqIfmzbxa4ZOr5jJc601zklsfEx9oTzmmj2nVpIPRpNlRTIh8lc1kyViIY7BWSGNmKw==
+
+drag-drop@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/drag-drop/-/drag-drop-6.0.0.tgz#5eb863c3a6a89f5ed0f8d4ddce2e5c136887f0ef"
+  integrity sha512-Ety3fa0SL8qsoB/xas1NP/pRNiV0CZ9o2a6a4TbprrKzvTqN1QwxWdO+NKMFPk3jfjMsQ2UJs5vhQAxu82mgRA==
+  dependencies:
+    blob-to-buffer "^1.0.2"
+    run-parallel "^1.0.0"
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -2446,6 +2459,11 @@ run-async@^2.2.0:
   integrity sha1-A3GrSuC91yDUFm19/aZP96RFpsA=
   dependencies:
     is-promise "^2.1.0"
+
+run-parallel@^1.0.0:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/run-parallel/-/run-parallel-1.1.9.tgz#c9dd3a7cf9f4b2c4b6244e173a6ed866e61dd679"
+  integrity sha512-DEqnSRTDw/Tc3FXf49zedI638Z9onwUotBMiUFKmrO2sdFKIbXamXGQ3Axd4qgphxKB4kw/qP1w5kTxnfU1B9Q==
 
 rxjs@^6.3.1, rxjs@^6.5.3:
   version "6.5.3"

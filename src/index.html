@@ -1,12 +1,99 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-    <link rel="stylesheet" href="index.css">
-  </head>
-  <body>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <title>TCP Command Sender</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div id="droparea">Aggiungi un file config.json</div>
+  <button id="on" onclick="on()">ON</button>
+  <button id="off" onclick="off()">OFF</button>
+  <hr>
+  <h3>Log:</h3>
+  <p id="log"></p>
+  <script>
+    const net = require('net');
+    const fs = require('fs');
+    const path = require('path');
+    let config;
+
+    try {
+      config = JSON.parse(fs.readFileSync(path.join(".", 'config.json')))
+    } catch (error) {
+      document.getElementById("on").style.display = "none";
+      document.getElementById("off").style.display = "none";
+      document.getElementById("droparea").style.display = "block";
+      document.getElementById("log").innerHTML +=
+        `<div>${(new Date()).toLocaleString()} - file di configurazione non trovato, prego trascinarne uno sulla finestra corrente.`;
+    }
+
+    const tcpClient = (ip, port, cmd) => {
+      var client = new net.Socket();
+      client.setTimeout(3000);
+      client.on('timeout', () => {
+        client.end();
+        document.getElementById("log").innerHTML +=
+          `<div>${(new Date()).toLocaleString()} - ${ip}:${port} non ha risposto.`;
+      });
+      client.connect(parseInt(port), ip, function () {
+        client.write(cmd);
+        client.end();
+        document.getElementById("log").innerHTML +=
+          `<div>${(new Date()).toLocaleString()} - ${ip}:${port} è stato inviato correttamente il comando ${cmd}.</div>`;
+      });
+    }
+
+    function cmdSend(cmd) {
+      config.forEach((server) => {
+        document.getElementById("log").innerHTML +=
+          `<div>${(new Date()).toLocaleString()} - ${server.ip}:${server.port} sto provando a inviare il comando "${server.commands[cmd]}".</div>`;
+        tcpClient(server.ip, server.port, server.commands[cmd]);
+      });
+    }
+
+    function on() {
+      cmdSend("on");
+    }
+
+    function off() {
+      cmdSend("off");
+    }
+  </script>
+  <script>
+    const dragDrop = require('drag-drop')
+
+    dragDrop('body', (files, pos, fileList, directories) => {
+      // console.log('Here are the dropped files', files) // Array of File objects
+      // console.log('Dropped at coordinates', pos.x, pos.y)
+      // console.log('Here is the raw FileList object if you need it:', fileList)
+      // console.log('Here is the list of directories:', directories)
+      files.forEach(file => {
+        if (file.name == "config.json" && file.type == "application/json") {
+          // config.json will be created or overwritten by default.
+          fs.copyFile(file.path, path.join(".", 'config.json'), (err) => {
+            console.log("Sono dentro")
+            if (err)
+              document.getElementById("log").innerHTML +=
+              `<div>${(new Date()).toLocaleString()} - config.json non salvato.</div>`;
+            else {
+              config = JSON.parse(fs.readFileSync(path.join(".", 'config.json')));
+              document.getElementById("log").innerHTML +=
+                `<div>${(new Date()).toLocaleString()} - config.json salvato correttamente.</div>`;
+              document.getElementById("on").style.display = "block";
+              document.getElementById("off").style.display = "block";
+              document.getElementById("droparea").style.display = "none";
+            }
+          });
+        } else {
+          document.getElementById("log").innerHTML +=
+            `<div>${(new Date()).toLocaleString()} - file non riconosciuto.</div>`;
+        }
+      });
+    })
+  </script>
+</body>
+
 </html>
