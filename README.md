@@ -31,6 +31,8 @@ This little app uses electron-forge, under the hoods, to create portable apps fo
 
 ## Windows
 
+This command is for creating a 32bit application since the wine prefix I use for cross compiling is 32it.
+
 ```shell
-./node_modules/.bin/electron-forge make -a x64 -p win32
+./node_modules/.bin/electron-forge make -a ia32 -p win32
 ```
