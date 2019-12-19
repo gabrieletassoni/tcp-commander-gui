@@ -18,10 +18,11 @@
     const net = require('net');
     const fs = require('fs');
     const path = require('path');
+    const homedir = require('os').homedir();
     let config;
 
     try {
-      config = JSON.parse(fs.readFileSync(path.join(".", 'config.json')))
+      config = JSON.parse(fs.readFileSync(path.join(homedir, 'config.json')))
     } catch (error) {
       document.getElementById("on").style.display = "none";
       document.getElementById("off").style.display = "none";
@@ -73,12 +74,12 @@
       files.forEach(file => {
         if (file.name == "config.json" && file.type == "application/json") {
           // config.json will be created or overwritten by default.
-          fs.copyFile(file.path, path.join(".", 'config.json'), (err) => {
+          fs.copyFile(file.path, path.join(homedir, 'config.json'), (err) => {
             if (err)
               document.getElementById("log").innerHTML +=
               `<div>${(new Date()).toLocaleString()} - config.json non salvato.</div>`;
             else {
-              config = JSON.parse(fs.readFileSync(path.join(".", 'config.json')));
+              config = JSON.parse(fs.readFileSync(path.join(homedir, 'config.json')));
               document.getElementById("log").innerHTML +=
                 `<div>${(new Date()).toLocaleString()} - config.json salvato correttamente.</div>`;
               document.getElementById("on").style.display = "inline";
