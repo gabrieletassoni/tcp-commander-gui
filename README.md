@@ -48,6 +48,8 @@ Please note that the second projector listed, doesn't have an entry for the comm
 
 # Development
 
+All the commands are run from shell, in a GNU/Linux environment.
+
 1. Clone this repository
 2. Run ```yarn install```
 3. Edit the files
@@ -56,6 +58,15 @@ Please note that the second projector listed, doesn't have an entry for the comm
 # Create package for your OS
 
 This little app uses electron-forge, under the hoods, to create portable apps for Linux, MacOS, Windows
+
+## All OSes
+
+All the commands are run from shell, in a GNU/Linux environment.
+This command will create a packaged releas for all the platforms configured in *package.json*
+
+```shell
+./node_modules/.bin/electron-forge publish
+```
 
 ## Macos
 
@@ -76,3 +87,13 @@ This command is for creating a 32bit application since the wine prefix I use for
 ```shell
 ./node_modules/.bin/electron-forge make -a ia32 -p win32
 ```
+
+For windows, to be cross compiled on Linux, you need to setup wine with WINEPREFIX at 32bit.
+
+### Wine Setup
+
+All the commands are run from shell, in a GNU/Linux environment.
+
+1. Remove any previously configured wine, if it's 64bit: ```rm -rf ~/.wine```
+2. Create a new, clean, wine folder: ```WINEARCH=win32 wineboot```
+3. Install dotnet: ```winetricks dotnet40```
