@@ -6,6 +6,46 @@ https://github.com/gabrieletassoni/tcp-commander-gui/packages
 
 Double click on it to install or run it.
 
+# config.json
+
+This file is the one in which you can add your servers definitions.
+On the first run of the application, no config.json is found, thus you have to drag&drop one on the gui.
+
+A config.json example to command some PJLINK projectors in a lan, altogether, can be:
+
+```json
+[
+    {
+        "desc": "Nec NP-PX1005QL-B",
+        "ip": "192.168.25.100",
+        "port": 7142,
+        "commands": {
+            "on": "%1POWR 1\r",
+            "off": "%1POWR 1\r"
+        }
+    },
+    {
+        "desc": "Sanyo PLC-HF10000L",
+        "ip": "192.168.25.101",
+        "port": 4352,
+        "commands": {
+            "on": "%1POWR 1\r"
+        }
+    },
+    {
+        "desc": "Sanyo PLC-HF10000L",
+        "ip": "192.168.25.102",
+        "port": 4352,
+        "commands": {
+            "on": "%1POWR 1\r",
+            "off": "%1POWR 0\r"
+        }
+    }
+]
+```
+
+Please note that the second projector listed, doesn't have an entry for the command "off", it will be queried by the application only if you push the "on" button.
+
 # Development
 
 1. Clone this repository
