@@ -1,8 +1,6 @@
 # Usage
 
-Download the package for your OS from:
-
-https://github.com/gabrieletassoni/tcp-commander-gui/packages
+Download the package for your OS from: [Release Page](https://github.com/gabrieletassoni/tcp-commander-gui/releases)
 
 Double click on it to install or run it.
 
