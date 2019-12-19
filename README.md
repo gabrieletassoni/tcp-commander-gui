@@ -61,23 +61,16 @@ This little app uses electron-forge, under the hoods, to create portable apps fo
 
 ## All OSes
 
-All the commands are run from shell, in a GNU/Linux environment.
-This command will create a packaged releas for all the platforms configured in *package.json*
-
-```shell
-./node_modules/.bin/electron-forge publish
-```
-
 ## Macos
 
 ```shell
-./node_modules/.bin/electron-forge make -a x64 -p darwin
+./node_modules/.bin/electron-forge publish -a x64 -p darwin
 ```
 
 ## Linux
 
 ```shell
-./node_modules/.bin/electron-forge make -a x64 -p linux
+./node_modules/.bin/electron-forge publish -a x64 -p linux
 ```
 
 ## Windows
@@ -85,10 +78,11 @@ This command will create a packaged releas for all the platforms configured in *
 This command is for creating a 32bit application since the wine prefix I use for cross compiling is 32it.
 
 ```shell
-./node_modules/.bin/electron-forge make -a ia32 -p win32
+wine /home/gabrieletassoni/Git/node/tcp-commander-gui/node_modules/rcedit/bin/rcedit.exe /tmp/electron-packager/win32-ia32/commandsender-win32-ia32/commandsender.exe --set-version-string FileDescription commandsender --set-version-string InternalName commandsender --set-version-string OriginalFilename commandsender.exe --set-version-string ProductName commandsender --set-version-string CompanyName "Gabriele Tassoni" --set-file-version 1.0.0 --set-product-version 1.0.0 --set-icon src/icon.ico
 ```
 
 For windows, to be cross compiled on Linux, you need to setup wine with WINEPREFIX at 32bit.
+I had to use directly the rcedit.exe since the publish command for Linux or Darwin gave several errors for win32. After that you can find the exe in ```/tmp/electron-packager/win32-ia32/commandsender-win32-ia32\```
 
 ### Wine Setup
 
