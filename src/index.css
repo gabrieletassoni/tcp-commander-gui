@@ -8,18 +8,13 @@ body {
 }
 
 button {
-  width: 49%;
+  width: calc(50% - 2em);
   height: 300px;
   border: 0;
   border-radius: 1em;
-}
-
-button#on {
-  background-color: #7395ae;
-}
-
-button#off {
-  background-color: #83677b;
+  margin: 1em;
+  font-size: xx-large;
+  font-weight: bolder;
 }
 
 #droparea {

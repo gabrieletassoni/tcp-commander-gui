@@ -9,8 +9,8 @@
 
 <body>
   <div id="droparea">Aggiungi un file config.json</div>
-  <button id="on" onclick="on()">ON</button>
-  <button id="off" onclick="off()">OFF</button>
+  <div id="buttons">
+  </div>
   <hr>
   <h3>Log:</h3>
   <p id="log"></p>
@@ -21,14 +21,30 @@
     const homedir = require('os').homedir();
     let config;
 
-    try {
-      config = JSON.parse(fs.readFileSync(path.join(homedir, 'config.json')))
-    } catch (error) {
-      document.getElementById("on").style.display = "none";
-      document.getElementById("off").style.display = "none";
-      document.getElementById("droparea").style.display = "block";
-      document.getElementById("log").innerHTML +=
-        `<div>${(new Date()).toLocaleString()} - file di configurazione non trovato, prego trascinarne uno sulla finestra corrente.`;
+    function parseConfig() {
+      let buttonsElem = document.getElementById("buttons");
+      buttonsElem.innerHTML = "";
+      try {
+        config = JSON.parse(fs.readFileSync(path.join(homedir, 'config.json')));
+        document.getElementById("log").innerHTML +=
+          `<div>${(new Date()).toLocaleString()} - config.json salvato correttamente.</div>`;
+        document.getElementById("droparea").style.display = "none";
+        let buttons = new Set();
+        config.forEach(element => {
+          Object.keys(element.commands).forEach(key => {
+            buttons.add(key);
+          })
+        });
+        buttons.forEach(button => {
+          buttonsElem.innerHTML +=
+            `<button id="${button}" class="cmd-button" onclick="cmdSend('${button}')">${button}</button>`;
+        });
+      } catch (error) {
+        console.log(error);
+        document.getElementById("droparea").style.display = "block";
+        document.getElementById("log").innerHTML +=
+          `<div>${(new Date()).toLocaleString()} - file di configurazione non trovato, prego trascinarne uno sulla finestra corrente.`;
+      }
     }
 
     const tcpClient = (ip, port, cmd) => {
@@ -49,19 +65,16 @@
 
     function cmdSend(cmd) {
       config.forEach((server) => {
-        document.getElementById("log").innerHTML +=
-          `<div>${(new Date()).toLocaleString()} - ${server.ip}:${server.port} sto provando a inviare il comando "${server.commands[cmd]}".</div>`;
-        tcpClient(server.ip, server.port, server.commands[cmd]);
+        let command = server.commands[cmd];
+        if (command) {
+          document.getElementById("log").innerHTML +=
+            `<div>${(new Date()).toLocaleString()} - ${server.ip}:${server.port} sto provando a inviare il comando "${command}".</div>`;
+          tcpClient(server.ip, server.port, command);
+        }
       });
     }
 
-    function on() {
-      cmdSend("on");
-    }
-
-    function off() {
-      cmdSend("off");
-    }
+    parseConfig();
   </script>
   <script>
     const dragDrop = require('drag-drop')
@@ -79,12 +92,7 @@
               document.getElementById("log").innerHTML +=
               `<div>${(new Date()).toLocaleString()} - config.json non salvato.</div>`;
             else {
-              config = JSON.parse(fs.readFileSync(path.join(homedir, 'config.json')));
-              document.getElementById("log").innerHTML +=
-                `<div>${(new Date()).toLocaleString()} - config.json salvato correttamente.</div>`;
-              document.getElementById("on").style.display = "inline";
-              document.getElementById("off").style.display = "inline";
-              document.getElementById("droparea").style.display = "none";
+              parseConfig();
             }
           });
         } else {
