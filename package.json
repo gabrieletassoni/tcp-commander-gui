@@ -1,8 +1,8 @@
 {
-  "name": "commandsender",
-  "productName": "commandsender",
+  "name": "tcp-commander-gui",
+  "productName": "tcp-commander-gui",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Sends commands to a bunch of servers using TCP, the list of servers and commans available must be configured in a config.json file in your home.",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -26,7 +26,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "commandsender"
+            "name": "tcp-commander-gui"
           }
         },
         {

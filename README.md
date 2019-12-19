@@ -64,13 +64,13 @@ This little app uses electron-forge, under the hoods, to create portable apps fo
 ## Macos
 
 ```shell
-./node_modules/.bin/electron-forge publish -a x64 -p darwin
+yarn electron-forge make -p darwin
 ```
 
 ## Linux
 
 ```shell
-./node_modules/.bin/electron-forge publish -a x64 -p linux
+yarn electron-forge make -p linux
 ```
 
 ## Windows
