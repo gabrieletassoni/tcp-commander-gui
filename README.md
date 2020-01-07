@@ -75,18 +75,14 @@ yarn electron-forge make -p linux
 
 This command is for creating a 32bit application since the wine prefix I use for cross compiling is 32it.
 
-```shell
-npm install -g electron-packager-interactive
-electron-packager-interactive
+```cmd
+yarn electron-forge.cmd make -p win32
 ```
-
-Then zip the application folder it creates.
-
-For windows, to be cross compiled on Linux, you need to setup wine with WINEPREFIX at 32bit.
-I had to use directly the rcedit.exe since the publish command for Linux or Darwin gave several errors for win32. After that you can find the exe in ```/tmp/electron-packager/win32-ia32/commandsender-win32-ia32\```
 
 ### Wine Setup
 
+For windows, to be cross compiled on Linux, you need to setup wine with WINEPREFIX at 32bit.
+I had to use directly the rcedit.exe since the publish command for Linux or Darwin gave several errors for win32. After that you can find the exe in ```/tmp/electron-packager/win32-ia32/commandsender-win32-ia32\```.
 All the commands are run from shell, in a GNU/Linux environment.
 
 1. Remove any previously configured wine, if it's 64bit: ```rm -rf ~/.wine```
